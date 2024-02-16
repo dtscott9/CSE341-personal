@@ -1,0 +1,35 @@
+### Local Get request for songs
+GET http://localhost:8080/songs
+
+### Local Post request for creating a contact
+POST http://localhost:8080/songs HTTP/1.1
+content-type: application/json
+
+{
+    "title": "any",
+    "artist": "any",
+    "album": "any",
+    "year": "2015",
+    "genre": "any",
+    "lyrics": "any",
+    "video": "any"
+}
+
+
+### Local Put request for updating a song
+PUT http://localhost:8080/songs/65cedf087679001f2dc6195f HTTP/1.1
+content-type: application/json
+
+{
+    "title": "any",
+    "artist": "any",
+    "album": "any",
+    "year": "2020",
+    "genre": "any",
+    "lyrics": "any",
+    "video": "any"
+}
+
+
+### Local Delete request for song
+DELETE http://localhost:8080/songs/65cee8b37177bd8911271ece HTTP/1.1
