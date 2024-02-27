@@ -17,15 +17,7 @@ const config = {
   issuerBaseURL: process.env.ISSUER_BASE_URL,
 };
 
-app
-  .use(bodyParser.json())
-  .use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    next();
-  })
-  .use("/", require("./routes"))
-  .use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument))
-  .use(auth(config));
+app.use(auth(config));
 
 app
   .get("/", (req, res) => {
@@ -34,6 +26,15 @@ app
   .get("/profile", requiresAuth(), (req, res) => {
     res.send(JSON.stringify(req.oidc.user));
   });
+
+  app
+  .use(bodyParser.json())
+  .use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    next();
+  })
+  .use("/", requiresAuth(), require("./routes"))
+  .use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 
 mongodb.initDb((err, mongodb) => {
